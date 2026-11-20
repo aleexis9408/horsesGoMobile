@@ -63,6 +63,36 @@ class GameViewModelPersistenceTest {
     }
 
     @Test
+    fun restartingFinishedMatchSavesOneNewOpeningAtTheSameLevel() {
+        val level = Difficulty.Intermediate5x5
+        val finished = MatchState(level, testBoard(level = level), Side.White)
+        withGame(MatchRead.Present(finished)) { vm, store ->
+            assertEquals(Side.Black, vm.uiState.value.winner)
+            store.accepted = false
+            vm.restartMatch()
+            runCurrent()
+            assertEquals(finished, vm.uiState.value.match)
+            assertEquals(GameMessage.SaveFailed, vm.uiState.value.message)
+
+            store.accepted = true
+            vm.retrySave()
+            vm.restartMatch()
+            runCurrent()
+            val opening = store.saved.single()
+            assertEquals(Screen.Board, vm.uiState.value.screen)
+            assertEquals(opening, vm.uiState.value.match)
+            assertEquals(level, opening.difficulty)
+            assertEquals(0, opening.board.moveNumber)
+            assertEquals(Side.Black, opening.turn)
+            assertNull(vm.uiState.value.winner)
+
+            vm.restartMatch()
+            runCurrent()
+            assertEquals(listOf(opening), store.saved)
+        }
+    }
+
+    @Test
     fun restoresWinnerAndInvalidDataReturnsToSelector() {
         withGame(MatchRead.Present(MatchState(Difficulty.Beginner, testBoard(), Side.Black))) { vm, store ->
             assertEquals(Side.White, vm.uiState.value.winner)

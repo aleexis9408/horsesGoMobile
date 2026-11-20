@@ -63,7 +63,16 @@ internal class GameViewModel(
         val current = state.value
         val level = current.selectedLevel ?: return
         if (!current.canLoad) return
+        startMatch(level)
+    }
 
+    fun restartMatch() {
+        val current = state.value
+        val match = current.match ?: return
+        if (current.canRestart) startMatch(match.difficulty)
+    }
+
+    private fun startMatch(level: Difficulty) {
         generation++
         searchJob?.cancel()
         searchJob = null

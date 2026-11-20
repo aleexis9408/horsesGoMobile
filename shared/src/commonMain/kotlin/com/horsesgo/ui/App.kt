@@ -81,6 +81,7 @@ internal fun HorsesGoApp(store: MatchStore) {
                             Screen.Board -> GameScreen(
                                 state = state,
                                 onPlay = game::play,
+                                onRestart = game::restartMatch,
                                 onChangeMap = game::openSelector,
                                 onViewMinimaxTree = game::openMinimaxTree,
                                 onCloseMinimaxTree = game::closeMinimaxTree,

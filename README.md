@@ -6,6 +6,11 @@ Horses Go es un juego de estrategia por turnos para Android e iOS. Cada particip
 controla un caballo en un tablero de ajedrez. La persona juega con el caballo negro
 y la máquina, con el blanco.
 
+Android e iOS dibujan el tablero con Compose Multiplatform. El tema marrón y los
+caballos Cburnett conservan el aspecto de Lichess y funcionan sin conexión.
+Cada nivel muestra únicamente las casillas de su mapa. Toca un destino marcado
+para mover el caballo negro.
+
 ## Cómo se juega
 
 1. Elige un nivel y pulsa **Cargar mapa** para iniciar una partida. Los caballos
@@ -14,7 +19,8 @@ y la máquina, con el blanco.
    destruye la casilla de origen y cede el turno. Ambos caballos pierden el acceso
    a esa casilla durante el resto de la partida.
 3. Cuando un caballo se queda sin movimientos legales en su turno, gana quien
-   hizo el último movimiento.
+   hizo el último movimiento. Pulsa **Reiniciar partida** para volver a jugar
+   en el mismo nivel con una nueva posición inicial.
 
 ## Niveles de dificultad
 
@@ -40,7 +46,10 @@ recupera la última partida, incluido el ganador si ya terminó.
 
 ## Ejecutar la app
 
-**Android.** Con JDK 17, Android SDK 36 y un emulador o dispositivo de 64 bits,
+Instala JDK 17. La primera compilación necesita conexión para descargar las
+dependencias. El repositorio incluye el Gradle Wrapper.
+
+**Android.** Con Android SDK 36 y un emulador o dispositivo de 64 bits,
 ejecuta desde la raíz y abre Horses Go.
 
 ```bash
@@ -48,9 +57,13 @@ ejecuta desde la raíz y abre Horses Go.
 ```
 
 **iOS.** En una Mac con Apple Silicon, abre `iosApp/iosApp.xcodeproj` con
-Xcode y ejecuta el esquema `iosApp`. El proyecto ejecuta Gradle para integrar
-el módulo compartido. Xcode 27 requiere un mínimo de iOS 15 para compilar con
-sus SDKs.
+Xcode y ejecuta el esquema `iosApp` en un iPhone o simulador con iOS 15 o
+posterior. El proyecto ejecuta Gradle para integrar
+el módulo compartido y empaquetar el tablero. Para instalar la app en un
+iPhone físico, selecciona tu equipo en **Signing & Capabilities**.
+
+Los caballos se incluyen como recursos vectoriales nativos compartidos. Consulta los
+[créditos y la licencia de las piezas](board/THIRD_PARTY.md).
 
 Las pruebas compartidas se ejecutan con `./gradlew :shared:allTests`. Las guías
 de [validación del juego base](specs/001-horses-go/quickstart.md) y de

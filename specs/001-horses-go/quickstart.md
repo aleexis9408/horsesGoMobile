@@ -9,8 +9,7 @@ documenta la arquitectura y las versiones de las dependencias.
 2. Preparar Android SDK 36 y un dispositivo o emulador de 64 bits con
    Android API 23 o superior.
 3. En una Mac con Apple Silicon, preparar Xcode y un simulador iOS ARM64.
-   Xcode 26.4 es la referencia documentada del compilador Kotlin. El proyecto
-   configura un mínimo de iOS 15 para los SDKs de Xcode 27.
+   El mínimo de la aplicación y de su framework compartido es iOS 15.
 
 ```bash
 java -version
@@ -49,6 +48,17 @@ desde el emulador o dispositivo.
 Registrar versiones, dispositivos y resultados con la revisión de
 implementación. El [contrato de interacción](contracts/gameplay.md)
 describe los estados que deben observarse.
+
+## Verificar el tablero nativo
+
+1. En Android y en iOS, carga los mapas 4×4, 5×5, 6×6 y 8×8. Comprueba las
+   coordenadas y los dos caballos. Las aperturas son aleatorias.
+2. Toca uno de los destinos verdes. Tras la respuesta de la máquina, comprueba
+   el contador de jugadas y las casillas destruidas. En 5×5, abre el árbol
+   MiniMax y vuelve al tablero.
+3. Cierra y reabre la app. Comprueba que se mantienen las dos posiciones y
+   las casillas destruidas. Para comparar el aspecto entre plataformas,
+   abre la misma partida guardada en ambos dispositivos.
 
 ## Resultados de implementación
 

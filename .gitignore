@@ -19,7 +19,3 @@ DerivedData/
 xcuserdata/
 *.xcuserstate
 .DS_Store
-gradle/wrapper/gradle-wrapper.jar
-.gitignore
-gradlew.bat
-gradlew

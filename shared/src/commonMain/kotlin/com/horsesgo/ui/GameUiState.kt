@@ -35,6 +35,9 @@ internal data class GameUiState(
     val canChangeMap: Boolean
         get() = screen == Screen.Board && !saving && minimaxTree == null
 
+    val canRestart: Boolean
+        get() = canChangeMap && winner != null && message != GameMessage.SaveFailed
+
     val canLoad: Boolean
         get() = screen == Screen.Selector && selectedLevel != null && !saving
 }

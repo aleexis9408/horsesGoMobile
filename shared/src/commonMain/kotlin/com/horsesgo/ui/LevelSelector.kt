@@ -1,9 +1,8 @@
 package com.horsesgo.ui
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +25,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.horsesgo.game.Difficulty
+import com.horsesgo.resources.Res
+import com.horsesgo.resources.horses_go_icon
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun LevelSelector(
@@ -38,12 +40,11 @@ internal fun LevelSelector(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
-            Modifier.size(54.dp).clip(RoundedCornerShape(16.dp)).background(GameAccent),
-            contentAlignment = Alignment.Center,
-        ) {
-            Knight(Modifier.size(42.dp), dark = true)
-        }
+        Image(
+            painter = painterResource(Res.drawable.horses_go_icon),
+            contentDescription = null,
+            modifier = Modifier.size(54.dp).clip(RoundedCornerShape(12.dp)),
+        )
         Column {
             Text("Horses Go", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
             Text("Gotta destroy them all!", color = GameAccent, style = MaterialTheme.typography.bodySmall)

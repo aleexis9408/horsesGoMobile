@@ -27,6 +27,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
+            implementation(libs.compose.resources)
             implementation(libs.lifecycle.runtime.compose)
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.coroutines.core)
@@ -38,4 +39,8 @@ kotlin {
             implementation(libs.coroutines.test)
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "com.horsesgo.resources"
 }
